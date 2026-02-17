@@ -1,6 +1,6 @@
 
 import { useProof } from '../hooks/useProof'
-import { CheckCircle, Circle, Copy, ExternalLink, Rocket } from 'lucide-react'
+import { CheckCircle, Circle, Copy } from 'lucide-react'
 
 // Simulated steps for display purposes, as per requirement
 const STEPS = [
@@ -43,8 +43,8 @@ export function ProofPage() {
               </span>
               <span
                 className={`kn-status-badge ${step.status === 'Completed' || (step.id === 8 && status === 'Shipped')
-                    ? 'kn-status-badge--shipped'
-                    : 'kn-status-badge--not-started'
+                  ? 'kn-status-badge--shipped'
+                  : 'kn-status-badge--not-started'
                   }`}
               >
                 {step.status === 'Completed' || (step.id === 8 && status === 'Shipped') ? (
