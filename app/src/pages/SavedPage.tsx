@@ -6,7 +6,7 @@ import { useSavedJobs } from '../hooks/useSavedJobs'
 import type { Job } from '../types/job'
 
 export function SavedPage() {
-  const { savedIds, isSaved, toggleSave } = useSavedJobs()
+  const { savedIds, toggleSave } = useSavedJobs()
   const [viewJob, setViewJob] = useState<Job | null>(null)
 
   const savedJobs = jobs.filter((j) => savedIds.includes(j.id))
