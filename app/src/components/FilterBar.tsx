@@ -1,6 +1,6 @@
 import type { Job } from '../types/job'
 
-export type SortOption = 'Latest' | 'Oldest' | 'Salary High' | 'Salary Low'
+export type SortOption = 'Latest' | 'Oldest' | 'Match Score' | 'Salary High' | 'Salary Low'
 
 interface FilterBarProps {
   keyword: string
@@ -21,7 +21,7 @@ interface FilterBarProps {
 const MODES = ['All', 'Remote', 'Hybrid', 'Onsite']
 const EXPERIENCE = ['All', 'Fresher', '0-1', '1-3', '3-5']
 const SOURCES = ['All', 'LinkedIn', 'Naukri', 'Indeed']
-const SORT_OPTIONS: SortOption[] = ['Latest', 'Oldest', 'Salary High', 'Salary Low']
+const SORT_OPTIONS: SortOption[] = ['Latest', 'Oldest', 'Match Score', 'Salary High', 'Salary Low']
 
 export function FilterBar({
   keyword,
