@@ -1,0 +1,31 @@
+/**
+ * KodNest Premium Build System — Layout Structure
+ * Every page follows this structure. No exceptions.
+ *
+ * [Top Bar]
+ * [Context Header]
+ * [Primary Workspace | Secondary Panel]
+ * [Proof Footer]
+ */
+
+.kn-app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.kn-app-shell > .kn-top-bar {
+  flex-shrink: 0;
+}
+
+.kn-app-shell > .kn-context-header {
+  flex-shrink: 0;
+}
+
+.kn-app-shell > .kn-workspace-layout {
+  flex: 1;
+}
+
+.kn-app-shell > .kn-proof-footer {
+  flex-shrink: 0;
+}
