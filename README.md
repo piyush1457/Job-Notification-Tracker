@@ -4,8 +4,6 @@
 
 A premium, intelligent job application tracker designed to help you organize your job search with style and efficiency. Built with React, TypeScript, and a focus on user experience.
 
-![Project Preview](https://placehold.co/600x400/png?text=Job+Notification+Tracker)
-
 ## 🚀 Core Features
 
 -   **Intelligent Match Scoring**: Automatically scores jobs based on your preferences (Location, Role, Experience) to highlight the best fits.
