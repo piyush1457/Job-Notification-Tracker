@@ -1123,3 +1123,116 @@ a:hover { text-decoration: underline; }
 }
 
 .kn-toast-close:hover { color: var(--kn-text-primary); }
+/* ─── Test & Ship Pages ────────────────────────────────────────────── */
+.kn-test-page,
+.kn-ship-page {
+    max-width: var(--kn-max-width-text);
+    margin: 0 auto;
+}
+
+.kn-test-header {
+    margin-bottom: var(--kn-space-lg);
+    padding-bottom: var(--kn-space-md);
+    border-bottom: 1px solid var(--kn-border);
+}
+
+.kn-test-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--kn-space-sm);
+}
+
+.kn-test-count {
+    font-family: var(--kn-font-heading);
+    font-size: var(--kn-size-h2);
+    font-weight: 600;
+}
+
+.kn-test-count--success {
+    color: var(--kn-success);
+}
+
+.kn-test-count--warning {
+    color: var(--kn-accent);
+}
+
+.kn-test-warning {
+    background-color: #FFF4F4;
+    color: var(--kn-accent);
+    padding: var(--kn-space-sm);
+    border-radius: var(--kn-radius);
+    font-weight: 500;
+    display: inline-block;
+}
+
+.kn-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kn-space-md);
+    margin-bottom: var(--kn-space-xl);
+}
+
+.kn-checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--kn-space-md);
+    padding: var(--kn-space-md);
+    background-color: white;
+    border: 1px solid var(--kn-border);
+    border-radius: var(--kn-radius);
+    transition: border-color var(--kn-transition);
+}
+
+.kn-checklist-item:hover {
+    border-color: var(--kn-text-primary);
+}
+
+.kn-checklist-item input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    accent-color: var(--kn-success);
+    cursor: pointer;
+}
+
+.kn-checklist-content {
+    flex: 1;
+}
+
+.kn-checklist-label {
+    display: block;
+    font-weight: 500;
+    font-size: var(--kn-size-body-lg);
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.kn-checklist-tooltip {
+    font-size: var(--kn-size-caption);
+    color: var(--kn-text-muted);
+}
+
+.kn-ship-lock {
+    text-align: center;
+    padding: var(--kn-space-xl);
+    background-color: white;
+    border: 1px solid var(--kn-border);
+    border-radius: var(--kn-radius);
+    border-top: 4px solid var(--kn-accent);
+}
+
+.kn-ship-lock-icon {
+    font-size: 3rem;
+    margin-bottom: var(--kn-space-md);
+    display: block;
+}
+
+.kn-ship-success {
+    text-align: center;
+    padding: var(--kn-space-xl);
+    background-color: white;
+    border: 1px solid var(--kn-border);
+    border-radius: var(--kn-radius);
+    border-top: 4px solid var(--kn-success);
+}
