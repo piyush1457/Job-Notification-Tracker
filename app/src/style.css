@@ -348,6 +348,12 @@ a:hover { text-decoration: underline; }
   font-weight: 500;
   font-size: var(--kn-size-body-lg);
   color: var(--kn-text-primary);
+  text-decoration: none;
+}
+
+.kn-top-nav-brand:hover {
+  text-decoration: none;
+  color: var(--kn-text-primary);
 }
 
 .kn-top-nav-links {
@@ -470,6 +476,87 @@ a:hover { text-decoration: underline; }
 }
 
 .kn-placeholder-subtext {
+  margin: 0;
+  font-size: var(--kn-size-body-lg);
+  line-height: var(--kn-line-height-body-lg);
+  color: var(--kn-text-muted);
+}
+
+/* ─── Landing Page ──────────────────────────────────────────────────── */
+.kn-landing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: var(--kn-max-width-text);
+  padding-top: var(--kn-space-xl);
+}
+
+.kn-landing-headline {
+  margin: 0 0 var(--kn-space-sm);
+  font-size: 2.75rem;
+  line-height: 1.2;
+}
+
+.kn-landing-subtext {
+  margin: 0 0 var(--kn-space-lg);
+  font-size: var(--kn-size-body-lg);
+  line-height: var(--kn-line-height-body-lg);
+  color: var(--kn-text-muted);
+}
+
+/* ─── Settings Page ─────────────────────────────────────────────────── */
+.kn-settings-page {
+  max-width: 560px;
+}
+
+.kn-settings-page h1 {
+  margin: 0 0 var(--kn-space-xs);
+}
+
+.kn-settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kn-space-md);
+}
+
+.kn-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kn-space-xs);
+}
+
+.kn-form-label {
+  font-size: var(--kn-size-caption);
+  font-weight: 600;
+  color: var(--kn-text-primary);
+}
+
+.kn-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235C5C5C' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--kn-space-sm) center;
+  padding-right: 36px;
+}
+
+/* ─── Empty States (Premium) ────────────────────────────────────────── */
+.kn-empty-state-page {
+  max-width: var(--kn-max-width-text);
+}
+
+.kn-empty-state-page h1 {
+  margin: 0 0 var(--kn-space-md);
+}
+
+.kn-empty-state--premium {
+  padding: var(--kn-space-xl);
+  background-color: white;
+  border: 1px solid var(--kn-border);
+  border-radius: var(--kn-radius);
+}
+
+.kn-empty-state-message {
   margin: 0;
   font-size: var(--kn-size-body-lg);
   line-height: var(--kn-line-height-body-lg);

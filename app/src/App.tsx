@@ -1,6 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { TopNav } from './components/TopNav'
-import { PlaceholderPage } from './pages/PlaceholderPage'
+import { LandingPage } from './pages/LandingPage'
+import { DashboardPage } from './pages/DashboardPage'
+import { SavedPage } from './pages/SavedPage'
+import { DigestPage } from './pages/DigestPage'
+import { SettingsPage } from './pages/SettingsPage'
+import { ProofPage } from './pages/ProofPage'
 
 export function App() {
   return (
@@ -9,12 +14,12 @@ export function App() {
         <TopNav />
         <main className="kn-route-main">
           <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<PlaceholderPage title="Dashboard" />} />
-            <Route path="/saved" element={<PlaceholderPage title="Saved" />} />
-            <Route path="/digest" element={<PlaceholderPage title="Digest" />} />
-            <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
-            <Route path="/proof" element={<PlaceholderPage title="Proof" />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/saved" element={<SavedPage />} />
+            <Route path="/digest" element={<DigestPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/proof" element={<ProofPage />} />
           </Routes>
         </main>
       </div>

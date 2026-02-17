@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useState } from 'react'
 
 const navItems = [
@@ -14,7 +14,7 @@ export function TopNav() {
 
   return (
     <nav className="kn-top-nav">
-      <div className="kn-top-nav-brand">Job Notification Tracker</div>
+      <Link to="/" className="kn-top-nav-brand">Job Notification Tracker</Link>
 
       <button
         type="button"
