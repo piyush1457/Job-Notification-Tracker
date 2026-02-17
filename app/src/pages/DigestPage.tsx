@@ -11,6 +11,7 @@ import {
   type DigestJob,
 } from '../utils/digest'
 import { getMatchScoreBadgeClass } from '../utils/matchScore'
+import { useJobStatus } from '../hooks/useJobStatus'
 
 function formatDate(dateKey: string): string {
   const [y, m, d] = dateKey.split('-')
@@ -25,6 +26,7 @@ function formatDate(dateKey: string): string {
 
 export function DigestPage() {
   const { preferences, hasPreferences } = usePreferences()
+  const { getAllStatus } = useJobStatus()
   const dateKey = getTodayKey()
 
   const [digest, setDigest] = useState<DigestJob[] | null>(() =>
@@ -97,6 +99,34 @@ export function DigestPage() {
           </p>
         </div>
       )}
+
+      {/* Recent Updates Section */}
+      <div className="kn-digest-updates">
+        <h2 className="kn-digest-subtitle">Recent Status Updates</h2>
+        {Object.entries(getAllStatus())
+          .filter(([_, data]) => data.status !== 'Not Applied')
+          .sort((a, b) => new Date(b[1].updatedAt).getTime() - new Date(a[1].updatedAt).getTime())
+          .map(([id, data]) => {
+            const job = jobs.find(j => j.id === id)
+            if (!job) return null
+            return (
+              <div key={id} className="kn-digest-update-card">
+                <div className="kn-update-header">
+                  <h3 className="kn-update-title">{job.title}</h3>
+                  <span className={`kn-status-badge kn-status-badge--${data.status.toLowerCase().replace(' ', '-')}`}>
+                    {data.status}
+                  </span>
+                </div>
+                <p className="kn-update-company">{job.company}</p>
+                <p className="kn-update-date">Updated: {new Date(data.updatedAt).toLocaleDateString()}</p>
+              </div>
+            )
+          })}
+        {Object.values(getAllStatus()).filter(d => d.status !== 'Not Applied').length === 0 && (
+          <p className="kn-text-muted">No recent status updates.</p>
+        )}
+      </div>
+      <br />
 
       {digest !== null && digest.length > 0 && (
         <div className="kn-digest-card">

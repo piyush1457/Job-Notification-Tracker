@@ -1005,3 +1005,121 @@ a:hover { text-decoration: underline; }
   border-radius: var(--kn-radius);
   color: var(--kn-text-primary);
 }
+
+/* ─── Status Buttons ────────────────────────────────────────────────── */
+.kn-status-group {
+  display: flex;
+  align-items: center;
+  gap: var(--kn-space-sm);
+  margin-top: var(--kn-space-sm);
+  padding-top: var(--kn-space-sm);
+  border-top: 1px solid var(--kn-border);
+}
+
+.kn-status-label {
+  font-size: var(--kn-size-caption);
+  color: var(--kn-text-muted);
+  font-weight: 500;
+}
+
+.kn-status-buttons {
+  display: flex;
+  background-color: var(--kn-background);
+  border-radius: var(--kn-radius);
+  padding: 2px;
+  border: 1px solid var(--kn-border);
+}
+
+.kn-status-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--kn-text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.kn-status-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: var(--kn-text-primary);
+}
+
+.kn-status-btn.active {
+  background-color: white;
+  color: var(--kn-text-primary);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.kn-status-btn.status-applied.active { color: #2563eb; }
+.kn-status-btn.status-rejected.active { color: #dc2626; }
+.kn-status-btn.status-selected.active { color: #16a34a; }
+
+.kn-status-text {
+  font-size: var(--kn-size-caption);
+  font-weight: 600;
+}
+
+.status-not-applied { color: var(--kn-text-muted); }
+.status-applied { color: #2563eb; }
+.status-rejected { color: #dc2626; }
+.status-selected { color: #16a34a; }
+
+/* ─── Toast Notifications ───────────────────────────────────────────── */
+.kn-toast-container {
+  position: fixed;
+  bottom: var(--kn-space-md);
+  right: var(--kn-space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--kn-space-sm);
+  z-index: 1000;
+}
+
+.kn-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--kn-space-sm);
+  background-color: white;
+  padding: var(--kn-space-sm);
+  border-radius: var(--kn-radius);
+  border: 1px solid var(--kn-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 300px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.kn-toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kn-toast--success .kn-toast-icon { color: var(--kn-success); }
+.kn-toast--error .kn-toast-icon { color: var(--kn-accent); }
+.kn-toast--info .kn-toast-icon { color: var(--kn-text-muted); }
+
+.kn-toast-message {
+  flex: 1;
+  font-size: var(--kn-size-body);
+}
+
+.kn-toast-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--kn-text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.kn-toast-close:hover { color: var(--kn-text-primary); }

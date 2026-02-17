@@ -1,21 +1,19 @@
 import type { Job } from '../types/job'
 import { getMatchScoreBadgeClass } from '../utils/matchScore'
+import { CheckCircle, XCircle, Clock, Check } from 'lucide-react'
+import type { JobStatus } from '../hooks/useJobStatus'
 
 interface JobCardProps {
   job: Job
   isSaved: boolean
   matchScore?: number | null
+  status?: JobStatus
   onView: () => void
   onSave: () => void
+  onStatusChange?: (status: JobStatus) => void
 }
 
-function formatPosted(days: number): string {
-  if (days === 0) return 'Today'
-  if (days === 1) return '1 day ago'
-  return `${days} days ago`
-}
-
-export function JobCard({ job, isSaved, matchScore, onView, onSave }: JobCardProps) {
+export function JobCard({ job, isSaved, matchScore, status = 'Not Applied', onView, onSave, onStatusChange }: JobCardProps) {
   const scoreBadgeClass =
     matchScore != null ? getMatchScoreBadgeClass(matchScore) : ''
 
@@ -43,7 +41,46 @@ export function JobCard({ job, isSaved, matchScore, onView, onSave }: JobCardPro
         <span>{job.experience}</span>
       </div>
       <p className="kn-job-card-salary">{job.salaryRange}</p>
-      <p className="kn-job-card-posted">{formatPosted(job.postedDaysAgo)}</p>
+
+      {onStatusChange && (
+        <div className="kn-status-group">
+          <span className="kn-status-label">Status:</span>
+          <div className="kn-status-buttons">
+            <button
+              className={`kn-status-btn ${status === 'Not Applied' ? 'active' : ''}`}
+              onClick={() => onStatusChange('Not Applied')}
+              title="Not Applied"
+            >
+              <Clock size={16} />
+            </button>
+            <button
+              className={`kn-status-btn status-applied ${status === 'Applied' ? 'active' : ''}`}
+              onClick={() => onStatusChange('Applied')}
+              title="Applied"
+            >
+              <Check size={16} />
+            </button>
+            <button
+              className={`kn-status-btn status-rejected ${status === 'Rejected' ? 'active' : ''}`}
+              onClick={() => onStatusChange('Rejected')}
+              title="Rejected"
+            >
+              <XCircle size={16} />
+            </button>
+            <button
+              className={`kn-status-btn status-selected ${status === 'Selected' ? 'active' : ''}`}
+              onClick={() => onStatusChange('Selected')}
+              title="Selected"
+            >
+              <CheckCircle size={16} />
+            </button>
+          </div>
+          <span className={`kn-status-text status-${status.toLowerCase().replace(' ', '-')}`}>
+            {status}
+          </span>
+        </div>
+      )}
+
       <div className="kn-job-card-actions">
         <button type="button" className="kn-btn kn-btn-secondary" onClick={onView}>
           View

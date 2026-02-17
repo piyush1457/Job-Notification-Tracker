@@ -11,6 +11,8 @@ interface FilterBarProps {
   onModeChange: (v: string) => void
   experience: string
   onExperienceChange: (v: string) => void
+  status: string
+  onStatusChange: (v: string) => void
   source: string
   onSourceChange: (v: string) => void
   sort: SortOption
@@ -20,6 +22,7 @@ interface FilterBarProps {
 
 const MODES = ['All', 'Remote', 'Hybrid', 'Onsite']
 const EXPERIENCE = ['All', 'Fresher', '0-1', '1-3', '3-5']
+const STATUSES = ['All', 'Not Applied', 'Applied', 'Rejected', 'Selected']
 const SOURCES = ['All', 'LinkedIn', 'Naukri', 'Indeed']
 const SORT_OPTIONS: SortOption[] = ['Latest', 'Oldest', 'Match Score', 'Salary High', 'Salary Low']
 
@@ -32,6 +35,8 @@ export function FilterBar({
   onModeChange,
   experience,
   onExperienceChange,
+  status,
+  onStatusChange,
   source,
   onSourceChange,
   sort,
@@ -79,6 +84,17 @@ export function FilterBar({
         {EXPERIENCE.map((exp) => (
           <option key={exp} value={exp}>
             {exp === 'All' ? 'Experience' : exp}
+          </option>
+        ))}
+      </select>
+      <select
+        className="kn-input kn-filter-select"
+        value={status}
+        onChange={(e) => onStatusChange(e.target.value)}
+      >
+        {STATUSES.map((s) => (
+          <option key={s} value={s}>
+            {s === 'All' ? 'Status' : s}
           </option>
         ))}
       </select>

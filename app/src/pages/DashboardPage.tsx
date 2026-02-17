@@ -5,6 +5,7 @@ import { ViewJobModal } from '../components/ViewJobModal'
 import { FilterBar, type SortOption } from '../components/FilterBar'
 import { useSavedJobs } from '../hooks/useSavedJobs'
 import { usePreferences } from '../hooks/usePreferences'
+import { useJobStatus, type JobStatus } from '../hooks/useJobStatus'
 import { computeMatchScore } from '../utils/matchScore'
 import type { Job } from '../types/job'
 
@@ -18,10 +19,12 @@ function filterAndSort(
   location: string,
   mode: string,
   experience: string,
+  statusFilter: string,
   source: string,
   sort: SortOption,
   showOnlyMatches: boolean,
-  minMatchScore: number
+  minMatchScore: number,
+  getStatus: (id: string) => JobStatus
 ): JobWithScore[] {
   let result = jobsList
 
@@ -40,6 +43,9 @@ function filterAndSort(
   }
   if (experience !== 'All') {
     result = result.filter((j) => j.experience === experience)
+  }
+  if (statusFilter !== 'All') {
+    result = result.filter((j) => getStatus(j.id) === statusFilter)
   }
   if (source !== 'All') {
     result = result.filter((j) => j.source === source)
@@ -74,6 +80,7 @@ function filterAndSort(
 export function DashboardPage() {
   const { isSaved, toggleSave } = useSavedJobs()
   const { preferences } = usePreferences()
+  const { getStatus, updateStatus, getAllStatus } = useJobStatus()
   const [viewJob, setViewJob] = useState<Job | null>(null)
   const [showOnlyMatches, setShowOnlyMatches] = useState(false)
 
@@ -81,6 +88,7 @@ export function DashboardPage() {
   const [location, setLocation] = useState('All')
   const [mode, setMode] = useState('All')
   const [experience, setExperience] = useState('All')
+  const [statusFilter, setStatusFilter] = useState('All')
   const [source, setSource] = useState('All')
   const [sort, setSort] = useState<SortOption>('Latest')
 
@@ -93,6 +101,12 @@ export function DashboardPage() {
     [preferences]
   )
 
+  // Force re-render when statuses change by depending on getAllStatus() result or length
+  // Since getAllStatus returns a ref-like object, we might need to depend on a version or just the object itself if it changes ref.
+  // But useJobStatus updates state, so this component will re-render.
+  // We pass getStatus to the filter function.
+  const allStatuses = getAllStatus() // Dependency for useMemo
+
   const filteredJobs = useMemo(
     () =>
       filterAndSort(
@@ -101,10 +115,12 @@ export function DashboardPage() {
         location,
         mode,
         experience,
+        statusFilter,
         source,
         sort,
         showOnlyMatches,
-        preferences.minMatchScore
+        preferences.minMatchScore,
+        getStatus
       ),
     [
       jobsWithScore,
@@ -112,18 +128,21 @@ export function DashboardPage() {
       location,
       mode,
       experience,
+      statusFilter,
       source,
       sort,
       showOnlyMatches,
       preferences.minMatchScore,
+      allStatuses, // Depend on status map to re-filter when status changes
+      getStatus
     ]
   )
 
   const hasPreferences = Boolean(
     preferences.roleKeywords.trim() ||
-      preferences.preferredLocations.length > 0 ||
-      preferences.preferredMode.length > 0 ||
-      preferences.skills.trim()
+    preferences.preferredLocations.length > 0 ||
+    preferences.preferredMode.length > 0 ||
+    preferences.skills.trim()
   )
 
   return (
@@ -157,6 +176,8 @@ export function DashboardPage() {
         onModeChange={setMode}
         experience={experience}
         onExperienceChange={setExperience}
+        status={statusFilter}
+        onStatusChange={setStatusFilter}
         source={source}
         onSourceChange={setSource}
         sort={sort}
@@ -170,8 +191,10 @@ export function DashboardPage() {
             job={job}
             isSaved={isSaved(job.id)}
             matchScore={hasPreferences ? job.matchScore : null}
+            status={getStatus(job.id)}
             onView={() => setViewJob(job)}
             onSave={() => toggleSave(job.id)}
+            onStatusChange={(s) => updateStatus(job.id, s, job.title)}
           />
         ))}
       </div>
